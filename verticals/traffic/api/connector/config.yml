@@ -1,0 +1,141 @@
+# FIWARE-PGSQL/CartoDB CONNECTOR CONFIGURATION FILE
+
+# Logging parameters.
+logging:
+  file:
+    # Default: `the_log`.
+    name: traffic-connector
+
+# Fiware subservices catalog.
+subservices:
+  - id: traffic
+
+_blocks:
+  - &traffic_trafficflowobserved_catalog
+      # Alternate key
+      - name: code
+        type: string
+        cartodb: true
+        constraint: true
+      - name: laneId
+        type: integer
+        cartodb: true
+        namedb: lane_id
+        constraint: true
+      # Meta
+      - name: address
+        type: json
+        cartodb: true
+      - name: description
+        type: string
+        cartodb: true
+      # Location
+      - name: location
+        namedb: position
+        type: geojson-point
+        cartodb: true
+
+  - &traffic_trafficflowobserved_variables
+      # Flags
+      - name: congested
+        type: boolean
+        cartodb: true
+      - name: isHoliday
+        type: boolean
+        cartodb: true
+        namedb: is_holiday
+      # Indicators
+      - name: intensidadSat
+        type: integer
+        cartodb: true
+        namedb: intensity_sat
+      - name: intensity_ratio
+        type: float
+        cartodb: true
+      - name: intensity
+        type: integer
+        cartodb: true
+      - name: intensityAVG
+        namedb: intensity_avg
+        type: integer
+        cartodb: true
+      - name: load
+        type: integer
+        cartodb: true
+      - name: loadAVG
+        namedb: load_avg
+        type: float
+        cartodb: true
+      - name: nivelServicio
+        type: integer
+        cartodb: true
+        namedb: service_level
+      - name: occupancy
+        type: integer
+        cartodb: true
+      - name: occupancyAVG
+        namedb: occupancy_avg
+        type: float
+        cartodb: true
+      # Dates
+      - name: dateModified
+        type: ISO8601
+        cartodb: true
+        namedb: TimeInstant
+
+# List of subscriptions
+subscriptions:
+  - id: traffic_trafficflowobserved_lastdata
+    subservice_id: madrid_traffic
+    schemaname: <scope>
+    fetchDataOnCreated: true
+    subsduration: P8M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: TrafficFlowObserved
+    mode: update
+    attributes:
+      - *traffic_trafficflowobserved_catalog
+      - *traffic_trafficflowobserved_variables
+    trigger_attributes:
+      - dateModified
+
+  - id: traffic_incidence_lastdata
+    subservice_id: madrid_traffic
+    schemaname: <scope>
+    fetchDataOnCreated: true
+    subsduration: P8M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: PointOfInterest
+    mode: update
+    attributes:
+      - name: name
+        type: string
+        cartodb: true
+      - name: descripcion
+        namedb: description
+        type: string
+        cartodb: true
+      - name: location
+        namedb: position
+        type: geojson-point
+        cartodb: true
+      - name: tipoincid
+        namedb: kind
+        type: integer
+        cartodb: true
+      - name: fh_inicio
+        namedb: start_date
+        type: ISO8601
+        cartodb: true
+      - name: fh_final
+        namedb: end_date
+        type: ISO8601
+        cartodb: true
+      - name: lastDateInProvider
+        namedb: TimeInstant
+        type: ISO8601
+        cartodb: true
+    trigger_attributes:
+      - lastDateInProvider

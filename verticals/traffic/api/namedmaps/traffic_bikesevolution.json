@@ -1,0 +1,175 @@
+{
+  "version": "0.0.1",
+  "name": "traffic_bikes_evo",
+  "auth": {
+    "method": "open"
+  },
+  "placeholders" : {
+    "scope": {
+      "type": "sql_ident",
+      "default": "malaga"
+    },
+    "start": {
+      "type": "sql_ident",
+      "default": "1900-01-01T00:00:00Z"
+    },
+    "finish": {
+      "type": "sql_ident",
+      "default": "2333-11-09T00:00:00Z"
+    },
+    "agg": {
+      "type": "sql_ident",
+      "default": "avg"
+    },
+    "image_url_suffix": {
+      "type": "sql_ident",
+      "default": "-dev"
+    }
+  },
+  "layergroup": {
+    "version": "1.0.1",
+    "layers": [
+
+      {
+        "type": "cartodb",
+        "options": {
+          "cartocss_version": "2.1.1",
+          "cartocss": "
+          #a {
+                line-width: 1.5;
+                line-opacity: 0.6;
+                line-color: #27272e ;
+                line-dasharray: 2, 4;
+                polygon-opacity: 0.6;
+                polygon-comp-op: overlay;
+
+
+                polygon-fill: ramp(
+                  [perc],
+                  (#00cc00, #2dcc00, #6dcc00, #b3cc00, #eccc00, #ffc100, #ff9f00, #ff7500, #ff4e00 ,#ff3300),
+                  (0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+                );
+
+                [zoom>=15] {
+                  polygon-opacity: 0;
+                }
+
+
+          }
+          ",
+          "sql": "
+          SELECT
+            ld.id_entity,
+            ld.name,
+            ld.cartodb_id,
+              round(<%=agg%>(m.freeslotnumber)/avg(m.totalslotnumber) * 100) as perc,
+            ld.the_geom_webmercator
+            FROM <%=scope%>_traffic_bikehiredockingstation_measurand m
+            JOIN (
+              SELECT
+                id_entity,
+                name,
+                cartodb_id,
+                ST_Buffer(ST_Centroid(the_geom_webmercator), 500) as the_geom_webmercator
+              FROM <%=scope%>_traffic_bikehiredockingstation_lastdata ) ld ON m.id_entity=ld.id_entity
+            WHERE m.totalslotnumber!=0
+            AND m.\"TimeInstant\" >= date_trunc('hour', '<%=start%>'::timestamp)
+            AND m.\"TimeInstant\" < date_trunc('hour', '<%=finish%>'::timestamp)
+            GROUP BY ld.id_entity, ld.name, ld.cartodb_id, ld.the_geom_webmercator",
+          "interactivity": [ "cartodb_id", "id_entity", "name", "perc" ]
+        }
+      },
+      {
+        "type": "cartodb",
+        "options": {
+          "cartocss_version": "2.1.1",
+          "cartocss": "
+
+
+            #a{
+                marker-width:0;
+                marker-fill-opacity: 0.85;
+                marker-placement: point;
+                marker-type: ellipse;
+                marker-fill: #141418;
+                marker-allow-overlap: true;
+            }
+
+            #a [zoom = 13]{
+              [perc >= 0][perc <10]{
+                marker-width: 23;
+              }
+
+              [perc >= 10][perc <100]{
+                marker-width: 25;
+              }
+
+              [perc >= 100]{
+                marker-width: 33;
+              }
+
+            }
+
+
+            #a [zoom >=14]{
+              [perc >= 0][perc <10]{
+                marker-width: 30;
+              }
+
+              [perc >= 10][perc <100]{
+                marker-width: 35;
+              }
+
+              [perc >= 100]{
+                marker-width: 45;
+              }
+
+            }
+
+
+            #a::labels [zoom = 13]{
+                          text-name: [perc];
+                          text-face-name: 'DejaVu Sans Book';
+                          text-size: 12;
+                          text-label-position-tolerance: 10;
+                          text-fill: #00cc00;
+                          text-dy: 0;
+                          text-allow-overlap: true;
+            }
+
+            #a::labels [zoom >=14]{
+                          text-name: [perc];
+                          text-face-name: 'DejaVu Sans Book';
+                          text-size: 18;
+                          text-label-position-tolerance: 10;
+                          text-fill: #00cc00;
+                          text-dy: 0;
+                          text-allow-overlap: true;
+            }
+
+
+
+
+          ",
+          "sql": "SELECT ld.id_entity, ld.name, ld.cartodb_id, m.perc, ST_Centroid(ld.the_geom_webmercator) as the_geom_webmercator
+              FROM (
+                SELECT id_entity, round(<%=agg%>(freeslotnumber) / avg(totalslotnumber) * 100) AS perc
+                  FROM <%=scope%>_traffic_bikehiredockingstation_measurand
+                  WHERE totalslotnumber != 0
+                    AND \"TimeInstant\" >= date_trunc('hour', '<%=start%>'::timestamp)
+                    AND \"TimeInstant\" <  date_trunc('hour', '<%=finish%>'::timestamp)
+                  GROUP BY id_entity
+                ) m
+              INNER JOIN (
+                SELECT id_entity, cartodb_id, name, the_geom_webmercator
+                  FROM <%=scope%>_traffic_bikehiredockingstation_lastdata
+                ) ld
+                ON m.id_entity = ld.id_entity",
+          "interactivity": [ "cartodb_id", "id_entity", "name", "perc" ]
+        }
+      }
+
+
+    ]
+  }
+}

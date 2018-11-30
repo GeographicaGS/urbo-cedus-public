@@ -1,0 +1,37 @@
+{
+  "company": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 0,
+    "y": 0
+  },
+  "company-all-active": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 52,
+    "y": 0
+  },
+  "company-available": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 0,
+    "y": 52
+  },
+  "school": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 52,
+    "y": 52
+  },
+  "school-available": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 104,
+    "y": 0
+  }
+}

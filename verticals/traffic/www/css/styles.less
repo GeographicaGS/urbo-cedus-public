@@ -1,0 +1,387 @@
+@fluid: #58BC8F;
+@stable: #ACB35D;
+@slow: #FFAA2A;
+@heavy: #FF7519;
+@congested: #FF2500;
+@congestedColor: #FF6633;
+@trafficColor: #4069b2; 
+*[data-vertical='traffic'] {
+
+  .variableselector {
+    span.selected {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+      font-size: 16px;
+      line-height: 16px;
+      color: @greyDark;
+      &:before {
+        content: '';
+        background-image: url('/verticals/traffic/img/traffic.svg');
+        background-size: 16px;
+        height: 16px;
+        width: 16px;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .toggle-3d {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .congestion {
+    display: block;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #1A5A6E;
+    margin-right: 6px;
+
+    &.congested {
+      background: @congestedColor;
+    }
+  }
+
+  .table {
+
+    &.transparent {
+
+      table {
+
+        .maincolumn {
+          padding-right: 0;
+          text-transform: lowercase;
+
+          .rankingBar {
+            width: 95px;
+            
+            div {
+              border-radius: 0;
+            }
+          }
+        }
+
+        .led {
+          padding-left: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .footlegend {
+        margin-top: 18px;
+        display: flex;
+        color: #A3B3BA;
+        font-size: 12px;
+        line-height: 14px;
+        align-items: center;
+      }
+    }
+  }
+
+  .widget {
+
+    .widget_content {
+
+      .var_list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        line-height: 18px;
+
+        .label {
+          color: @congestedColor;
+          font-weight: 600;
+        }
+
+        .value {
+          margin-left: 6px;
+          color: #FFFFFF;
+        }
+      }
+
+      .multipleVariableWidget {
+        margin-top: 60px;
+
+        .variable {
+          padding-bottom: 10px;
+
+          &:not(:first-child) {
+            margin-top: 14px;
+          }
+
+          .variable-title {
+            color: @greyBluish;
+            display: flex;
+            align-items: center;
+            &:before {
+              content: '';
+              width: 16px;
+              height: 16px;
+              margin-right: 5px;
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+          }
+
+          &.max {
+            
+            .variable-title:before {
+              background-image: url('/img/utils/valor-max.svg');
+            }
+          }
+          
+          &.avg {
+            .variable-title:before {
+              background-image: url('/img/utils/valor-med.svg');              
+            } 
+          }
+
+          &.min {
+            .variable-title:before {
+              background-image: url('/img/utils/valor-min.svg');
+            }
+          }
+
+
+          .variable-value {
+            margin-top: 0;
+            font-size: 48px;
+            line-height: 51px;
+
+            .variable-unit {
+              color: @greyBluish;
+              font-size: 24px;
+              font-weight: 200;
+              line-height: 31px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .content {
+    &.hidden {
+      display: none;
+    }
+    .multiselector {
+  
+      &:after {
+        content: none;
+      }
+  
+      .legendInline {
+        &.statusesTypes, &.incidencesTypes, &.levelsTypes {
+          li[data-id] {
+            position: relative;
+            &:before {
+              content: '';
+              display: block;
+              height: 14px;
+              width: 14px;
+              margin-right: 10px;
+            }
+    
+            span {
+              position: absolute;
+              right: 12px;
+            }
+          }
+  
+          &.statusesTypes li[data-id], &.levelsTypes li[data-id] {
+            &.fluid:before {
+              background-color: @fluid;
+            }
+            &.stable:before {
+              background-color: @stable;
+            }
+    
+            &.slow:before {
+              background-color: @slow;
+            }
+    
+            &.heavy:before {
+              background-color: @heavy;
+            }
+    
+            &.congested:before {
+              background-color: @congested;
+            }
+          }
+  
+          &.incidencesTypes li[data-id] {
+            &:before {
+              background-size: cover;
+              height: 24px;
+              width: 24px;
+            }
+            &.roadworks:before {
+              background-image: url(/verticals/traffic/img/construction.svg);
+            }
+            &.accident:before {
+              background-image: url(/verticals/traffic/img/accident.svg);
+            }
+    
+            &.event:before {
+              background-image: url(/verticals/traffic/img/event.svg);
+            }
+    
+            &.alert:before {
+              background-image: url(/verticals/traffic/img/hazard.svg);
+            }
+    
+            &.upcoming:before {
+              background-image: url(/verticals/traffic/img/misc.svg);
+            }
+          }
+        }
+      }
+    }
+
+    .ramp {
+      display: flex;
+      width: ~"calc(100% - 16px)";
+      margin-top: 8px;
+      * {
+        flex: 1 1 100%;
+        &:nth-child(4) {
+          background-color: #51AC9A
+        }
+        &:nth-child(3) {
+          background-color: #4A9DA4
+        }
+        &:nth-child(2) {
+          background-color: #428DAF
+        }
+        &:nth-child(1) {
+          background-color: #336C7D
+        }
+        &:nth-child(5) {
+          background-color: @fluid
+        }
+        &:nth-child(6) {
+          background-color: @stable
+        }
+        &:nth-child(7) {
+          background-color: @slow
+        }
+        &:nth-child(8) {
+          background-color: @heavy
+        }
+        &:nth-child(9) {
+          background-color: @congested
+        }
+      }
+
+    }
+    .ramplabel {
+      position: relative;
+      font-size: 12px;
+      &:first-of-type {
+        left: -16px;
+      }
+      &:last-child {
+        right: -32px;
+      }
+    }
+  }
+
+  .mapboxgl-popup {
+    .with-extended-title {
+      .header {
+        margin-bottom: 6px;
+        h4 {
+          color: #4069B2;
+          font-size: 12px;
+          line-height: 14px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .mapboxgl-popup-content{
+  
+      .content {
+        max-height: 400px;
+        .popup-row {
+          
+          .extended-title {
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+            margin-right: -16px;
+            > span {
+              font-size: 12px;
+            }
+          }
+
+          &.colored {
+            &.fluid:before {
+              background-color: @fluid;
+            }
+            &.stable:before {
+              background-color: @stable;
+            }
+    
+            &.slow:before {
+              background-color: @slow;
+            }
+    
+            &.heavy:before {
+              background-color: @heavy;
+            }
+    
+            &.congested:before {
+              background-color: @congested;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .issues {
+    overflow: hidden;
+    .list_elements {
+      overflow-y: auto;
+    }
+  }
+  .variableselector {
+    .options {
+      max-height: 220px;
+    }
+  }
+
+  .ui-state-disabled {
+    opacity: 0.6;
+  }
+  .co_slider_filter.firstresponse {
+    height: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+
+.rectangleIcon.traffic {
+  background-color: @trafficColor;
+}
+#category_list {
+  .content {
+    .box.fullicon.traffic {
+      background-color: @trafficColor;
+      background-image: url(/verticals/traffic/img/menuPanel/SC_ic_vertical_movilidad_M.svg);
+      background-size: 38px !important;
+    }
+  }
+}
+
+.trafficColor{
+  background-color: @trafficColor;
+  &.trafficIcon {
+    background-image: url(/verticals/traffic/img/menuPanel/SC_ic_vertical_movilidad_M.svg);
+    background-size: 38px !important;    
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/verticales/20px/school</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons/verticales/20px/school" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="62627-copy" transform="translate(2.000000, 4.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <polygon id="Shape" points="16 4.17478578 16 3.82518142 7.99649591 0 0 3.82180312 0 4.17809848 7.99649591 8"></polygon>
+            <path d="M2.66666667,6.4 L2.66666667,8.79058528 L7.58661391,11.2 L8.41335235,11.2 L13.3197714,8.79720474 C13.3244945,8.78667534 13.3289139,8.77618023 13.3333333,8.76558224 L13.3333333,6.4 L7.99998313,9.01183986 L2.66666667,6.4 Z" id="Shape"></path>
+            <polygon id="Shape" points="15.0140384 9.69758708 15.0140384 5.33333333 14.3193312 5.64411856 14.3193312 9.69758708 13.8666667 10.9209016 14.5509245 11.7333333 14.7824452 11.7333333 15.4666667 10.9209016"></polygon>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,107 @@
+{
+  "accident": {
+    "height": 74,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 0,
+    "y": 0
+  },
+  "construction": {
+    "height": 74,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 64,
+    "y": 0
+  },
+  "event": {
+    "height": 74,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 0,
+    "y": 74
+  },
+  "hazard": {
+    "height": 74,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 64,
+    "y": 74
+  },
+  "misc": {
+    "height": 74,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 128,
+    "y": 0
+  },
+  "via-level0": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 192,
+    "y": 0
+  },
+  "via-level1": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 128,
+    "y": 74
+  },
+  "via-level2": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 180,
+    "y": 74
+  },
+  "via-level3": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 0,
+    "y": 148
+  },
+  "via-level4": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 52,
+    "y": 148
+  },
+  "via-level5": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 104,
+    "y": 148
+  },
+  "via-variacion0": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 156,
+    "y": 148
+  },
+  "via-variacion1": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 0,
+    "y": 200
+  },
+  "via-variacion2": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 52,
+    "y": 200
+  },
+  "via-variacion3": {
+    "height": 52,
+    "pixelRatio": 2,
+    "width": 52,
+    "x": 104,
+    "y": 200
+  }
+}

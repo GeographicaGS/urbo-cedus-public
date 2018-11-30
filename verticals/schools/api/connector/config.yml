@@ -1,0 +1,221 @@
+# FIWARE-PGSQL/CartoDB CONNECTOR CONFIGURATION FILE
+
+# Logging parameters.
+logging:
+  file:
+    # Default: `the_log`.
+    name: schools-connector
+
+# Fiware subservices catalog.
+subservices:
+  - id: schools
+
+# Common properties
+_blocks:
+  - &schools_poi_variables
+    - name: name
+      type: string
+      cartodb: true
+    - name: address
+      type: json
+      cartodb: true
+    - name: category
+      type: list-string
+    - name: description
+      type: string
+      cartodb: true
+    - name: location
+      namedb: position
+      type: geojson-point
+      cartodb: true
+    - name: dateModified
+      namedb: TimeInstant
+      type: ISO8601
+      cartodb: true
+
+  - &common_custom_vars
+    - name: name
+      type: string
+      cartodb: true
+    - name: from
+      namedb: from_date
+      type: integer
+      cartodb: true
+    - name: to
+      namedb: to_date
+      type: integer
+      cartodb: true
+    - name: dateModified
+      namedb: TimeInstant
+      type: ISO8601
+      cartodb: true
+
+# List of subscriptions
+subscriptions:
+  - id: schools_institute_lastdata
+    subservice_id: schools
+    schemaname: <scope>
+    subsduration: P2M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: PointOfInterest
+        typePattern: "^Institute:.*"
+    mode: update
+    fetchDataOnCreated: true
+    attributes:
+      - *schools_poi_variables
+    trigger_attributes:
+      - dateModified
+
+  - id: schools_company_lastdata
+    subservice_id: schools
+    schemaname: <scope>
+    subsduration: P2M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: PointOfInterest
+        typePattern: "^Company:.*"
+    mode: update
+    fetchDataOnCreated: true
+    attributes:
+      - *schools_poi_variables
+      -
+        - name: kpis
+          type: json
+          cartodb: true
+
+    trigger_attributes:
+      - dateModified
+
+  - id: schools_internship_lastdata
+    subservice_id: schools
+    schemaname: <scope>
+    subsduration: P2M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: Internship
+        typePattern: "^Internship:.*"
+    mode: update
+    fetchDataOnCreated: true
+    attributes:
+      - *common_custom_vars
+      -
+        - name: companyId
+          namedb: company_id
+          type: string
+          cartodb: true
+        - name: description
+          type: string
+          cartodb: true
+        - name: remainingPlaces
+          namedb: remaining_places
+          type: integer
+          cartodb: true
+        - name: totalPlaces
+          namedb: total_places
+          type: integer
+          cartodb: true
+    trigger_attributes:
+      - dateModified
+
+  - id: schools_course_lastdata
+    subservice_id: schools
+    schemaname: <scope>
+    subsduration: P2M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: Course
+    mode: update
+    fetchDataOnCreated: true
+    attributes:
+      - *common_custom_vars
+      -
+        - name: instituteId
+          namedb: institute_id
+          type: string
+          cartodb: true
+        - name: miurCode
+          namedb: miur_code
+          type: string
+          cartodb: true
+        - name: schoolYear
+          namedb: school_year
+          type: string
+          cartodb: true
+    trigger_attributes:
+      - dateModified
+
+  - id: schools_internship_instance_lastdata
+    subservice_id: schools
+    schemaname: <scope>
+    subsduration: P2M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: InternshipInstance
+    mode: update
+    fetchDataOnCreated: true
+    attributes:
+      - name: dateModified
+        namedb: TimeInstant
+        type: ISO8601
+        cartodb: true
+      - name: companyId
+        namedb: company_id
+        type: string
+        cartodb: true
+      - name: courseId
+        namedb: course_id
+        type: string
+        cartodb: true
+      - name: instituteId
+        namedb: institute_id
+        type: string
+        cartodb: true
+      - name: internshipId
+        namedb: internship_id
+        type: string
+        cartodb: true
+      - name: number
+        namedb: number_val
+        type: integer
+        cartodb: true
+    trigger_attributes:
+      - dateModified
+
+  - id: schools_kpi_lastdata
+    subservice_id: schools
+    schemaname: <scope>
+    subsduration: P2M
+    substhrottling: PT0S
+    entityTypes:
+      - typeName: KeyPerformanceIndicator
+    mode: update
+    fetchDataOnCreated: true
+    attributes:
+      - name: name
+        type: string
+        cartodb: true
+      - name: description
+        type: string
+        cartodb: true
+      - name: category
+        type: list-string
+        cartodb: true
+      - name: kpiValue
+        namedb: kpi_value
+        type: integer
+        cartodb: true
+      - name: process
+        namedb: institute_id
+        type: string
+        cartodb: true
+      - name: product
+        namedb: product
+        type: json
+        cartodb: true
+      - name: dateModified
+        namedb: TimeInstant
+        type: ISO8601
+        cartodb: true
+    trigger_attributes:
+      - dateModified

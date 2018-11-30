@@ -1,0 +1,4 @@
+**/*.DS_Store
+
+# postman collections
+_postman

@@ -1,0 +1,11 @@
+SELECT
+c.id_entity AS c_id,
+c.the_geom AS the_geom,
+c.the_geom_webmercator AS the_geom_webmercator,
+c.name AS company_name,
+c.kpis#>>'{0,kpivalue}' AS internships_places,
+c.kpis#>>'{1,kpivalue}' AS internships_number,
+SUM(i.remaining_places) > 0 AS i_remaining_places
+FROM <%= scope %>_schools_company_lastdata AS c LEFT JOIN <%= scope %>_schools_internship_lastdata AS i ON c.id_entity = i.company_id
+GROUP BY c_id, c.the_geom, c.the_geom_webmercator, company_name, internships_places, internships_number
+order by SUM(i.remaining_places) asc

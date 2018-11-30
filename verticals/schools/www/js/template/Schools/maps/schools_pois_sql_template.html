@@ -1,0 +1,13 @@
+SELECT
+ins.id_entity as institute_id,
+comp.name AS company_name,
+comp.the_geom AS the_geom,
+comp.the_geom_webmercator AS the_geom_webmercator,
+SUM(inter.remaining_places) AS remaining_places,
+SUM(inter.total_places) AS total_places
+FROM
+<%= scope %>_schools_institute_lastdata ins INNER JOIN <%= scope %>_schools_internship_instance_lastdata ii ON ins.id_entity = ii.institute_id
+INNER JOIN <%= scope %>_schools_internship_lastdata inter ON inter.id_entity = ii.internship_id
+LEFT JOIN <%= scope %>_schools_company_lastdata comp ON comp.id_entity = ii.company_id
+WHERE ins.id_entity= '<%= institute_id %>'
+GROUP BY ins.id_entity, comp.name, comp.the_geom, comp.the_geom_webmercator

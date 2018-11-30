@@ -1,0 +1,42 @@
+SELECT
+the_geom,
+address::text,
+the_geom_webmercator,
+updated_at::text,
+cartodb_id,
+id_entity,
+coalesce(<%= variable %>, 0::double precision ) as variable,
+service_level,
+intensity as intensity,
+load as load,
+occupancy as occupancy,
+intensity_avg as intensity_avg,
+load_avg as load_avg,
+occupancy_avg as occupancy_avg,
+intensity_relative_ratio,
+load_relative_ratio,
+occupancy_relative_ratio,
+CASE WHEN 
+  (updated_at >= (now() - INTERVAL '15 MINUTES') AND error != 'S')
+  THEN FALSE
+  ELSE TRUE
+END as is_old
+FROM <%= scope %>_traffic_trafficflowobserved_lastdata
+WHERE FALSE
+<% if(!serviceLevel) { %>
+  <% if(status && !relative) {
+  _.each(status, function(s) {
+    var statusObject = App.Static.Collection.Traffic.IntensityLevel.get(s).toJSON();%>
+    OR <%= variable %> >= <%= App.Utils.Traffic.calculatedValue(statusObject.greaterOrEqualThan, c) %>
+    <% if(statusObject.lessThan) { %>
+      AND  <%= variable %> < <%= App.Utils.Traffic.calculatedValue(statusObject.lessThan, c) %>
+    <% }}) %>
+  <% } else if (status && relative) { %>
+      OR TRUE
+  <% } %>
+<% } else {
+  _.each(levels, function(s) { %>
+    OR service_level IN (<%= levels %>)
+  <% }) %>
+<% } %>
+ORDER BY <%= variable %> asc

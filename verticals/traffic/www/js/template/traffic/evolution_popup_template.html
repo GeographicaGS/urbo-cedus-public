@@ -1,0 +1,21 @@
+<div class="popupMap">
+  <div class="header">
+    <h3><%= data.name || data.id_entity %></h3>
+    <p class="time">
+      <%if(now){%>
+        <%= __('Ahora') %>
+      <%}else{%>
+        <%=App.formatDate(App.ctx.getDateRange().start) + ' - ' + App.formatDate(App.ctx.getDateRange().finish)%>
+      <%}%>
+    </p>
+  </div>
+  <div class="content scrollable">
+    <div class="variable">
+      <!-- <div class="threshold warning"></div> -->
+      <div class="data">
+        <h4><%= __('Porcentaje de uso') %></h4>
+        <p class="value big"><%= App.nbf(data.perc, {decimals: 0}) %> <span class="unit">%</span></p>
+      </div>
+    </div>
+  </div>
+</div>

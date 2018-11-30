@@ -1,0 +1,109 @@
+<div class='<%=className%>'>
+    <h3><%=__('Ajustes')%></h3>
+    <div class="list_elements">
+      <div class="element">
+        <div class="header">
+          <span class="title">
+            <img class="icon" src="/verticals/traffic/img/traffic.svg" alt="icon">
+            <%=__('Mapa de calor')%>
+          </span>
+        </div>
+        <div class="content">
+          <div class="multiselector active">
+            <h4 class="notoggler">
+              <%=__('Incidencias')%>
+            </h4>
+            <ul class="legendInline incidencesTypes">
+              <!-- <li data-id="all"><%=__('Todo')%></li> -->
+              <%_.each(incidences,function(t){
+                var checkIds = m.incidences;
+                var selected = _.find(checkIds, function(d) { return d === t.id });
+                %>
+                <li data-id='<%= t.id%>' <%= selected ? 'selected' : '' %> class="<%= selected ? '' : 'disabled' %> <%= t.cid %>">
+                  <a class="label">
+                    <%= t.name %>
+                  </a>
+                  <span class="total">-</span>
+                </li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+
+        <div id="statusesTypes" class="content">
+          <div class="multiselector active">
+            <h4 class="notoggler">
+              <%=__('Intensidad')%>
+            </h4>
+            <ul class="legendInline statusesTypes">
+              <!-- <li data-id="all"><%=__('Todo')%></li> -->
+              <%_.each(status,function(t){
+                var checkIds = m.status;
+                var selected = _.find(checkIds, function(d) { return d === t.id });
+                %>
+                <li data-id='<%= t.id%>' <%= selected ? 'selected' : '' %> class="<%= selected ? '' : 'disabled' %> <%= t.cid %>">
+                  <a class="label">
+                    <%= t.name %>
+                  </a>
+                  <span class="total">-</span>
+                </li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+
+        <div id="levelsTypes" class="content hidden">
+          <div class="multiselector active">
+            <h4 class="notoggler">
+              <%=__('Nivel de servicio')%>
+            </h4>
+            <ul class="legendInline levelsTypes">
+              <!-- <li data-id="all"><%=__('Todo')%></li> -->
+              <%_.each(levels,function(t){
+                var checkIds = m.status;
+                var selected = _.find(checkIds, function(d) { return d === t.id });
+                %>
+                <li data-id='<%= t.id%>' <%= selected ? 'selected' : '' %> class="<%= selected ? '' : 'disabled' %> <%= t.cid %>">
+                  <a class="label">
+                    <%= t.name %>
+                  </a>
+                  <span class="total">-</span>
+                </li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+
+        <div id="relativeTypes" class="content hidden">
+          <div class="multiselector active">
+            <h4 class="notoggler">
+                <%=__('Variable relativa')%>
+            </h4>
+            <div class="legendInline">
+              <div class="ramp">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <label class="ramplabel">Por debajo de la media</label>
+              <label class="ramplabel">Por encima de la media</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="multiselector active">
+            <h4 class="toggler">
+              <%=__('Modificador del color')%>
+            </h4>
+            <div class="co_slider_filter firstresponse"></div>
+          </div>
+        </div>
+      </div>
+  </div>

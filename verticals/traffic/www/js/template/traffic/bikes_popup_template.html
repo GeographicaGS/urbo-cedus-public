@@ -1,0 +1,61 @@
+<div class="popupMap expanded">
+  <div class="header">
+    <p class="category"><%= __('Estación de bibicletas') %></p>
+    <h3><%= data.name || data.id_entity %></h3>
+    <p class="time">
+      <%= __('Ahora') %>
+    </p>
+  </div>
+  <div class="content scrollable">
+    <div class="control">
+
+      <div class="variable columned">
+        <div class="data">
+          <h4><%= __('Disponibilidad') %></h4>
+            <p class="value big">
+              <%= App.nbf(data.available_percentage, {'decimals': 0}) %> <span class="unit">%</span>
+            </p>
+        </div>
+
+    <div class="footer">
+      <a class="more inline" target="_blank" href="http://maps.google.com/maps?q=&layer=c&cbll=<%=pos[0]%>,<%=pos[1]%>&cbp="><%= __('StreetView') %></a>
+
+    </div>
+
+
+      </div>
+
+      <div class="variable right columned">
+
+        <div class="data">
+          <h4><%= __('Bicicletas') %></h4>
+          <p class="value">
+            <span class="available"><%= data.availablebikenumber %></span>
+             ·
+            <span class="rented"><%=data.freeslotnumber%></span>
+            (<%= __('de') %> <%=data.totalslotnumber%>)
+          </p>
+        </div>
+
+        <div class="footer">
+          <a class="more inline empty" target="_blank" href="https://www.google.com/maps?saddr=current+Position&daddr=<%=pos[0]%>,<%=pos[1]%>"><%= __('Cómo llegar') %></a>
+        </div>
+
+      </div>
+    </div>
+
+    <% if(data.people) { %>
+
+      <div class="variable extra">
+        <div class="data">
+          <h4><%=__('Población servida')%></h4>
+          <p class="value"><%= App.nbf(data.people, {'decimals': 0}) %></p>
+        </div>
+      </div>
+    <% } %>
+
+  </div>
+
+
+
+</div>

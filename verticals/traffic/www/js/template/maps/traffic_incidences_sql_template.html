@@ -1,0 +1,15 @@
+SELECT
+  the_geom,
+  the_geom_webmercator,
+  updated_at::text,
+  cartodb_id,
+  kind,
+  description,
+  start_date::text,
+  end_date::text
+FROM <%= scope %>_traffic_incidence_lastdata
+WHERE FALSE 
+<% if(incidences && incidences.length) { %>
+  OR (updated_at >= (now() - INTERVAL '15 MINUTES')
+  AND kind in (<%= incidences %>))
+<% } %>

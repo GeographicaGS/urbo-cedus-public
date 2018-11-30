@@ -1,0 +1,20 @@
+SELECT 
+    n1.ins_id as id_entity,
+    n1.ins_pos as the_geom,
+    n1.ins_name as name,
+    n1.ins_pos_wb as the_geom_webmercator,
+    COALESCE(n2.remaining_places, 0) AS remaining_places,
+    COALESCE(n2.total_places, 0) AS total_places FROM
+(SELECT
+id_entity AS ins_id,
+the_geom AS ins_pos,
+the_geom_webmercator as ins_pos_wb,
+name AS ins_name
+FROM <%= scope %>_schools_institute_lastdata) n1
+LEFT JOIN (SELECT
+ins.id_entity AS ins_id,
+SUM(inter.remaining_places) AS remaining_places,
+SUM(inter.total_places) AS total_places
+FROM <%= scope %>_schools_institute_lastdata ins LEFT JOIN <%= scope %>_schools_internship_instance_lastdata ii ON ins.id_entity = ii.institute_id
+INNER JOIN <%= scope %>_schools_internship_lastdata inter ON inter.id_entity = ii.internship_id AND inter.remaining_places > 0
+GROUP BY ins_id) n2 ON n1.ins_id = n2.ins_id

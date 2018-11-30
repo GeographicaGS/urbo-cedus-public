@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="37px" viewBox="0 0 32 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>cartografia/hazard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="cartografia/hazard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/positive/peligros" transform="translate(6.000000, 5.000000)">
+            <g id="Group" transform="translate(1.000000, 3.000000)">
+                <path d="M9,1.03972886 L1.70984748,14 L16.2901525,14 L9,1.03972886 Z" id="Triangle-2" stroke="#383D4C" stroke-width="2"></path>
+                <polygon id="Triangle-2" fill="#383D4C" points="8.99990497 5.80581241 11.8030632 11 6.19674673 11"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

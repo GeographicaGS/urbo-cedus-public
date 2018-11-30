@@ -1,0 +1,9 @@
+App.Utils.Traffic = {};
+App.View.Map.Traffic = {};
+App.View.Map.Layer.Traffic = {};
+App.View.Widgets.Traffic = {};
+App.View.Filter.Traffic = {};
+App.View.Panels.Traffic = {};
+App.Collection.Traffic = {};
+App.Static.Collection.Traffic = {};
+App.Static.Collection.Traffic.vehicle = {};

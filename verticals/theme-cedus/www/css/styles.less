@@ -1,0 +1,201 @@
+body[layout='cedus'],body[layout='cedus_zone_andalucia']{
+  @cedusColor: #0D47A1;
+  @cedusBlue: #1565C0;
+  @cedusBlue2: #1976D2;
+  @cedusGrey: #f6f6f6;
+  @fiwareBlue: #5DC0D1;
+
+  .add-iframe {
+    display: block;
+  }
+
+  header{
+    background-color: @cedusColor;
+
+    .tool{
+      a{
+        color: #fff;
+        &.lang{
+          border-color:#fff;
+        }
+        &.admin::before{
+            background-image: url(/img/SC_ic_menu-admin-white.svg);
+        }
+        &.user::before{
+            background-image: url(/img/SC_ic_menu-usuario-white.svg);
+        }
+        &.lang::before{
+            background-image: url(/img/SC_ic_menu-idioma-white.svg);
+        }
+      }
+      ul.genericPopup li {
+        color: @cedusColor;
+        .icon {
+          background-color: @cedusColor;
+        }
+      }
+    }
+    .lang_popup{
+      a{
+        color: @cedusColor;
+      }
+    }
+
+    .co_logos {
+      align-items: center;
+      justify-content: flex-start;
+
+      .companyLogo {
+        padding-right: 5px;
+        padding-top: 1px;
+        max-height: 100%;
+      }
+
+      *:not(.companyLogo) {
+        display: none;
+      }
+    }
+  }
+
+  .login{
+    background-color: #eee;
+    form{
+      background-color: @cedusBlue;
+      .content input{
+        &[type='text'],&[type='password']{
+          background-color: @cedusBlue2;
+        }
+
+
+        &[type='submit']{
+          background-color: @cedusColor;
+        }
+        &.cedus-idm-login-btn {
+          background-color: @cedusColor;
+        }
+      }
+      .co_logos {
+        align-items: center;
+        justify-content: center;
+
+        .companyLogo {
+          // height: 82px;
+          padding-right: 5px;
+        }
+
+        *:not(.companyLogo) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  nav.navbar{
+    .menuPanel{
+      background-color: #fff;
+
+      #menuPanel{
+        .scope_info {
+          .header{
+            color:@cedusBlue;
+          }
+          .concurrence, .frames {
+            color: @cedusBlue;
+          }
+          .vertical_list {
+            .element{
+              border-color: #ccc;
+              .name{
+                color: @cedusBlue
+              }
+              &.selected{
+                .name{
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+        .cities{
+          .header{
+            .searchToolBox{
+              background-color: @cedusGrey;
+              input{
+                color: @greyDark;
+                background-color: @cedusGrey;
+                &::-webkit-input-placeholder{
+                  color: @greyBluish;
+                }
+                &::-moz-placeholder{
+                  color: @greyBluish;
+                }
+                &:-ms-input-placeholder{
+                  color: @greyBluish;
+                }
+                &:-moz-placeholder{
+                  color: @greyBluish;
+                }
+              }
+            }
+          }
+          .city_list{
+            .city{
+              border-color: #ccc;
+              a.linkToCategories{
+                color: @cedusBlue;
+              }
+            }
+          }
+        }
+        .concurrence{
+          border-color: #ccc;
+          color:#002c66;
+        }
+      }
+    }
+    a.menu{
+      background-color: #fff;
+      &.active,&:hover{
+        background-color: #f6f6f6;
+      }
+    }
+  }
+  main {
+    #scope_list .content .box{
+      background-color: #fff;
+      .header{
+        span{
+          color: @cedusBlue;
+        }
+      }
+    }
+    flex: 0 0 ~ "calc(100% - 100px)";
+    max-height:  ~ "calc(100% - 100px)";
+  }
+
+  main.navbar {
+    flex: 0 0 ~ "calc(100% - 154px)";
+    max-height:  ~ "calc(100% - 154px)";
+  }
+
+  footer {
+    flex: 0 0 46px;
+    .cedusCopyright {
+      flex-direction: row;
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      &:before {
+        content: '';
+        height: 36px;
+        width: 78px;
+        background: url('/verticals/theme-cedus/img/eitdigital_logo_login@2x.png') no-repeat;
+        background-size: cover;
+        display: inline-block;
+        margin-right: 20px;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="37px" viewBox="0 0 32 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>cartografia/construction</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="cartografia/construction" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/positive/obras" transform="translate(6.000000, 6.000000)">
+            <path d="M11.7810757,13.0092354 L3.88709172,13.5310379 C3.34664671,13.567885 2.8480426,13.2350725 2.66208302,12.7144586 L1.03211328,7.7179241 C0.907752816,7.36965959 1.15996049,7 1.52374391,7 L16,7 L11.7810757,13.0092354 Z" id="Fill-1" fill="#383D4C" fill-rule="evenodd"></path>
+            <path d="M19,7 L16.3901412,7 L11.0177647,14.3862353 C10.4015294,15.1009412 9.33211765,15.2047059 8.58988235,14.6223529 L6.49221176,12.5947059" id="Stroke-3" stroke="#383D4C" stroke-width="2"></path>
+            <path d="M6,15.9993768 C6,17.1037706 5.10501714,17.9987535 4.00062325,17.9987535 C2.89498286,17.9987535 2,17.1037706 2,15.9993768 C2,14.8949829 2.89498286,14 4.00062325,14 C5.10501714,14 6,14.8949829 6,15.9993768" id="Fill-6" fill="#383D4C" fill-rule="evenodd"></path>
+            <path d="M3,5.85671861 L14,5.85671861 L10.2931507,1.79387017 C9.35316373,0.762407102 8.00560992,0.73360534 7.03979126,1.72186577 L3,5.85671861 Z" id="Fill-11" fill="#383D4C" fill-rule="evenodd"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,95 @@
+# FIWARE-PGSQL/CartoDB CONNECTOR CONFIGURATION FILE
+
+# Logging parameters.
+logging:
+  file:
+    # Default: `the_log`.
+    name: students-connector
+
+# Fiware subservices catalog.
+subservices:
+  - id: students
+
+# List of subscriptions
+subscriptions:
+  - id: students_pointofinterest_lastdata
+    subservice_id: students
+    schemaname: <scope>
+    subsduration: P8M
+    substhrottling: PT0S
+    fetchDataOnCreated: true
+    recreateSubscription: true
+    entityTypes:
+      - typeName: PointOfInterest
+    mode: update
+    attributes:
+      - name: address
+        type: json
+        cartodb: true
+      - name: category
+        type: list-string
+        cartodb: true
+      - name: name
+        type: string
+        cartodb: true
+      - name: description
+        type: string
+        cartodb: true
+      - name: location
+        namedb: position
+        type: geojson-point
+        cartodb: true
+      - name: abstract
+        type: string
+        cartodb: true
+      - name: tags
+        type: list-string
+        cartodb: true
+      - name: typology
+        type: string
+        cartodb: true
+      - name: scopes
+        type: list-string
+        cartodb: true
+      - name: contacts
+        type: json
+        cartodb: true
+      - name: priceInfos
+        namedb: price_infos
+        type: list-string
+        cartodb: true
+      - name: organizer
+        type: string
+        cartodb: true
+      - name: availableServices
+        namedb: available_services
+        type: list-string
+        cartodb: true
+      - name: capacities
+        type: list-string
+        cartodb: true
+      - name: owner
+        type: string
+        cartodb: true
+      - name: mediaResources
+        namedb: media_resources
+        type: list-string
+        cartodb: true
+      - name: openingTime
+        namedb: opening_time
+        type: string
+        cartodb: true
+      - name: orderBy
+        namedb: order_by
+        type: integer
+        cartodb: true
+      - name: dateModified
+        namedb: TimeInstant
+        type: ISO8601
+        cartodb: true
+      - name: refSeeAlso
+        nabedb: refseealso
+        type: list-string
+        cartodb: true
+    trigger_attributes:
+      - dateModified

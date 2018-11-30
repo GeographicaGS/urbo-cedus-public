@@ -1,0 +1,9 @@
+App.Utils.Schools = {};
+App.View.Map.Schools = {};
+App.View.Map.Layer.Schools = {};
+App.View.Widgets.Schools = {};
+App.View.Filter.Schools = {};
+App.View.Panels.Schools = {};
+App.Collection.Schools = {};
+App.Static.Collection.Schools = {};
+App.Static.Collection.Schools.vehicle = {};

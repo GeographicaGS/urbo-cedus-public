@@ -1,0 +1,10 @@
+SELECT *,generate_series(1,10,1) as t FROM (
+  SELECT
+    cartodb_id,
+    id_entity,
+    name,
+    the_geom_webmercator,
+    status,
+    (CASE WHEN status='withIncidence' THEN 1 ELSE 0 END) as torque_category
+  FROM <%=scope%>_traffic_bikehiredockingstation_lastdata_view
+) s

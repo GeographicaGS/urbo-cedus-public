@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>cartografia/turismo/residence</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="cartografia/turismo/residence" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M16.4444444,2.88288478 L16.4444444,1.06506889 L21.7777778,1.06506889 L21.7777778,6.46831896 L23.1158296,7.36784957 C23.6685135,7.73940179 24,8.36168016 24,9.02764606 L24,22.2008303 C24,23.3053998 23.1045695,24.2008303 22,24.2008303 L4,24.2008303 C2.8954305,24.2008303 2,23.3053998 2,22.2008303 L2,9.02764606 C2,8.36168016 2.3314865,7.73940179 2.88417043,7.36784957 L11.8841704,1.3174294 C12.5589074,0.863824717 13.4410926,0.863824717 14.1158296,1.3174294 L16.4444444,2.88288478 Z" id="Combined-Shape" stroke="#FFFFFF" stroke-width="2" fill="#FF9900"></path>
+        <g id="62627-copy" transform="translate(5.000000, 9.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <polygon id="Shape" points="16 4.17478578 16 3.82518142 7.99649591 0 0 3.82180312 0 4.17809848 7.99649591 8"></polygon>
+            <path d="M2.66666667,6.4 L2.66666667,8.79058528 L7.58661391,11.2 L8.41335235,11.2 L13.3197714,8.79720474 C13.3244945,8.78667534 13.3289139,8.77618023 13.3333333,8.76558224 L13.3333333,6.4 L7.99998313,9.01183986 L2.66666667,6.4 Z" id="Shape"></path>
+            <polygon id="Shape" points="15.0140384 9.69758708 15.0140384 5.33333333 14.3193312 5.64411856 14.3193312 9.69758708 13.8666667 10.9209016 14.5509245 11.7333333 14.7824452 11.7333333 15.4666667 10.9209016"></polygon>
+        </g>
+    </g>
+</svg>
