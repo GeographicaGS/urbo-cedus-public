@@ -30,7 +30,7 @@ subscriptions:
         type: list-string
         cartodb: true
       - name: name
-        type: string
+        type: url
         cartodb: true
       - name: description
         type: string
@@ -40,7 +40,7 @@ subscriptions:
         type: geojson-point
         cartodb: true
       - name: abstract
-        type: string
+        type: url
         cartodb: true
       - name: tags
         type: list-string
@@ -73,11 +73,11 @@ subscriptions:
         cartodb: true
       - name: mediaResources
         namedb: media_resources
-        type: list-string
+        type: json
         cartodb: true
       - name: openingTime
         namedb: opening_time
-        type: string
+        type: url
         cartodb: true
       - name: orderBy
         namedb: order_by

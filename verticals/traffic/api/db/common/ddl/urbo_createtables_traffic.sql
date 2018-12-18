@@ -213,6 +213,7 @@ BEGIN
                                                                       _tb_bhlastdata,
                                                                       _tb_bhcatalog,
                                                                       _tb_bhhistoric,
+                                                                      _tb_bhobs,
                                                                       _tb_incidence_ld_name
                                                                     ]);
             _sql = _sql || format('
@@ -224,6 +225,8 @@ BEGIN
                 _tb_bhlastdata_view, _tb_bhlastdata,
                 _tb_bhlastdata_view
             );
+
+        --    _sql = _sql || format('select urbo_traffic_bikes_trig(''%s'');', id_scope);
 
         ELSE
             _sql = _sql || urbo_pk_qry(tb_names);

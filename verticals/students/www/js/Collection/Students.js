@@ -53,7 +53,7 @@ App.Static.Collection.Students.ResidencesType =  new Backbone.Collection([
 
 App.Static.Collection.Students.POIsTypes =  new Backbone.Collection([
   {id: 'pois', name: 'Points of Interest', color: '#58BC8F', icon: '/verticals/students/img/pois_negative.svg'},
-  {id: '29', name: 'Colleges and Universities', color: '#FF9900', icon: '/verticals/students/img/residence.svg'},
+  {id: '29', name: 'Campus', color: '#FF9900', icon: '/verticals/students/img/residence.svg'},
   {id: '107', name: 'Landmarks', color: '#DB6CA2', icon: '/verticals/students/img/historic-shop-white.svg'},
   {id: '311', name: 'Museums', color: '#857DC9', icon: '/verticals/students/img/museo-white.svg'},
   {id: '371', name: 'Protected Area', color: '#98C16C', icon: '/verticals/students/img/reserved-white.svg'},

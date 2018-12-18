@@ -27,6 +27,100 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
       coord: [],
     });
 
+    // Diffentent properties to show
+    var defaultProperties = {
+      abstract: {
+        label: 'Abstract',
+        parseValue: function(value) {
+          return value.length > 100
+            ? value.slice(0, 100).concat('...| exactly')
+            : value.concat('| exactly');
+        }
+      },
+      available_services: {
+        label: 'Available Services',
+        parseValue: function(values) {
+          return values.join(', ').concat('| exactly');
+        }
+      },
+      contacts: {
+        label: 'Contacts',
+        parseValue: function(values) {
+          if(typeof values === 'string') {
+            values = JSON.parse(values);
+          }
+          return _.map(values, function(value) {
+            return value.Type + ': ' + value.String;
+          }).join('<br/>').concat('| exactly');
+        }
+      },
+      capacities: {
+        label: 'Capacities',
+      },
+      description: {
+        label: 'Description',
+        parseValue: function(value) {
+          return value.length > 100
+            ? value.slice(0, 100).concat('...| exactly')
+            : value.concat('| exactly');
+        }
+      },
+      media_resources: {
+        label: 'Media Resources',
+        parseValue: function(values) {
+          values = typeof values === 'string'
+            ? JSON.parse(values)
+            : values;
+
+          values = _.filter(values, function(value) {
+            return value.type !== 'image';
+          });
+
+          if(values.length) {
+            return _.map(values, function(value) {
+              var currentHtml = '<a href="%uri%" target="_blank">%name%</a>';
+  
+              currentHtml = currentHtml.replace('%uri%', value.uri);
+              currentHtml = currentHtml.replace('%name%', value.name);
+              return currentHtml;
+            }).join('<br/>').concat('| exactly');
+          } else {
+            return false;
+          }
+        }
+      },
+      price_infos: {
+        label: 'Price Info'
+      },
+      opening_time: {
+        label: 'Opening Time'
+      },
+      order_by: {
+        label: 'Order by'
+      },
+      organizer: {
+        label: 'Organizer'
+      },
+      owner: {
+        label: 'Owner'
+      },
+      scopes: {
+        label: 'Scopes',
+        parseValue: function(values) {
+          return values.join(', ').concat('| exactly');
+        }
+      },
+      tags: {
+        label: 'Tags',
+        parseValue: function(values) {
+          return values.join(', ').concat('| exactly');
+        }
+      },
+      typology: {
+        label: 'Typology'
+      },
+    };
+
     this.model = new App.Model.TilesModel({
       url: 'https://' + App.Utils.getCartoAccount('students') + '.carto.com/api/v1/map',
       params: {
@@ -72,7 +166,7 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
             'line-dasharray': [3,2],
             'line-width': 2,  
           },
-          'filter': ['all', false]          
+          'filter': ['all', false]
         },
         {
           'id': 'areaFill',
@@ -82,7 +176,7 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
             'fill-color': '#F7A034',
             'fill-opacity': 0.1,
           },
-          'filter': ['all', false]          
+          'filter': ['all', false]
         }
       ],
       map: map,
@@ -90,14 +184,14 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
 
     this.layer = new App.View.Map.Layer.MapboxSQLLayer({
       source: {
-        id: 'cartoSource',        
+        id: 'cartoSource',
         model: this.model,
       },
       legend: {},
       layers: [
         {
           'id': 'residences',
-          'type': 'symbol',        
+          'type': 'symbol',
           'source': 'cartoSource',
           'source-layer': 'cartoLayer',
           'layout': {
@@ -111,11 +205,13 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
     })
     .setHoverable(true)
     .setPopup('with-extended-title', __('Residence'), function(e, popup) {
+
         _this.clicked = {features: [App.Utils.toDeepJSON(e.features[0])]};
         _this.popup = popup;
-        _this.clicked.features[0].properties.coord = JSON.parse(e.features[0].properties.coord).coordinates;        
+        _this.clicked.features[0].properties.coord = JSON.parse(e.features[0].properties.coord).coordinates;
         e.features[0].properties.fromNow = moment(e.features[0].properties.dateModified).fromNow();
 
+        // Title
         var template = [ {
           output: App.View.Map.RowsTemplate.EXTENDED_TITLE,
           properties: [{
@@ -123,7 +219,21 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
           },{
             value: '| exactly'
           }]
-        }, {
+        }];
+
+        // All Properties
+        var _templateProperties = _this._makeTemplateProperties(
+          e.features[0].properties, 
+          defaultProperties, 
+          App.View.Map.RowsTemplate.BASIC_ROW
+        );
+
+        _.each(_templateProperties, function(_currentTemplate) {
+          template.push(_currentTemplate);
+        });
+
+        // Action Button
+        template.push({
           output: App.View.Map.RowsTemplate.ACTION_BUTTON,
           classes: 'residencesbutton',
           properties: [{
@@ -131,7 +241,7 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
           },{
             value: 'Select residence | exactly | translate'
           }]
-        }];
+        });
 
         return template;
       }
@@ -139,14 +249,14 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
 
     this.poisLayer = new App.View.Map.Layer.MapboxSQLLayer({
       source: {
-        id: 'cartoPoisSource',        
+        id: 'cartoPoisSource',
         model: this.poisModel,
       },
       legend: {},
       layers: [
         {
           'id': 'pois',
-          'type': 'symbol',        
+          'type': 'symbol',
           'source': 'cartoPoisSource',
           'source-layer': 'cartoPoisLayer',
           'layout': {
@@ -157,7 +267,7 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
               'stops': [
                 ["107", 'historic-shops'],
                 ["311", 'museo'],
-                ["371", 'reserved'],
+                ["371", 'protected-areas'],
                 ["430", 'itinerary'],
                 ["435", 'hostel'],
               ]
@@ -170,44 +280,6 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
       map: map
     })
     .setPopup('with-extended-title', '', function(e, popup) {
-      var propertiesToShow = {
-        abstract: {
-          label: 'Abstract',
-          parseValue: function(value) {
-            return value.length > 100
-              ? value.slice(0, 100).concat('...| exactly')
-              : value.concat('| exactly');
-          }
-        },
-        availableServices: {
-          label: 'Available Services',
-        },
-        contacts: {
-          label: 'Contacts',
-        },
-        capacities: {
-          label: 'Capacities',
-        },
-        mediaResources: {
-          label: 'Media Resources'
-        },
-        priceInfos: {
-          label: 'Price Info'
-        },
-        openingTime: {
-          label: 'Opening Time'
-        },
-        owner: {
-          label: 'Owner'
-        },        
-        tags: {
-          label: 'Tags'
-        },
-        typology: {
-          label: 'Typology'
-        },
-      };
-
       e.features[0].properties.categoryName =
         App.Static.Collection.Students.POIsTypes.get(e.features[0].properties.category).get('name');
 
@@ -221,20 +293,15 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
         }]
       }];
 
-      // Other properties
-      _.each(Object.keys(propertiesToShow), function(property){
-        if(e.features[0].properties.hasOwnProperty(property)
-            && e.features[0].properties[property] !== '[object Object]') {
-          template.push({
-            output: App.View.Map.RowsTemplate.BASIC_ROW,
-            properties: [{
-              label: __(propertiesToShow[property].label),
-              value: typeof propertiesToShow[property].parseValue === 'function'
-                ? propertiesToShow[property].parseValue(e.features[0].properties[property])
-                : property,
-            }]            
-          });
-        }
+      // All Properties
+      var _templateProperties = _this._makeTemplateProperties(
+        e.features[0].properties, 
+        defaultProperties, 
+        App.View.Map.RowsTemplate.BASIC_ROW
+      );
+
+      _.each(_templateProperties, function(_currentTemplate) {
+        template.push(_currentTemplate);
       });
 
       return template;
@@ -296,5 +363,28 @@ App.View.Map.Layer.Students.ResidencesLayer = Backbone.View.extend({
       // Clear filter to show all 'interest point' when back from detail
       this.map.variableSelector.options.filterModel.set('the_geom', null);
     }
-  }
+  },
+
+  _makeTemplateProperties: function(data, properties, template) {
+    return _.reduce(Object.keys(properties), function(parseProperties, property) {
+        if(data.hasOwnProperty(property) && data[property] !== '[object Object]' && data[property] !== 'null') {
+          var currentValue = typeof properties[property].parseValue === 'function'
+            ? properties[property].parseValue(data[property])
+            : property;
+
+          if(currentValue !== false) {
+            parseProperties.push({
+              output: template,
+              properties: [{
+                label: __(properties[property].label),
+                value: typeof properties[property].parseValue === 'function'
+                  ? properties[property].parseValue(data[property])
+                  : property,
+              }]
+            });
+          }
+        }
+        return parseProperties;
+    },[]);
+  },
 });

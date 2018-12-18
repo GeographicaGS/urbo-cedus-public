@@ -4,7 +4,16 @@ SELECT
   lastdata.the_geom_webmercator as the_geom_webmercator,
   lastdata.name::text as name,
   lastdata.updated_at::text as updated_at,
-  lastdata.id_entity as id_entity
+  lastdata.id_entity as id_entity,
+  lastdata.abstract::text as abstract,
+  lastdata.tags::text[] as tags,
+  lastdata.typology::text as typology,
+  lastdata.contacts::json::text as contacts,
+  lastdata.available_services::text[] as available_services,
+  lastdata.owner::text as owner,
+  lastdata.media_resources::json::text as media_resources,
+  lastdata.opening_time::text as opening_time
+
 FROM <%= scope %>_students_pointofinterest_lastdata lastdata
 WHERE TRUE
 AND '29' = ANY(lastdata.category)
